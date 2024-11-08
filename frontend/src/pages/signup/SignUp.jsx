@@ -25,9 +25,9 @@ const SignUp = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
-      <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
-        <h1 className="text-3xl font-semibold text-center text-gray-300">
-          Sign Up <span className="text-blue-500"> ChatApp</span>
+      <div className="w-full p-6 rounded-lg shadow-md bg-gray-300 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-15">
+        <h1 className="text-3xl font-semibold text-center text-blue-500">
+          Sign Up <span className="text-green-600"> ChatApp</span>
         </h1>
 
         <form onSubmit={handleSubmit}>
@@ -37,8 +37,8 @@ const SignUp = () => {
             </label>
             <input
               type="text"
-              placeholder="John Doe"
-              className="w-full input input-bordered  h-10"
+              placeholder="Enter full name"
+              className="w-full input input-bordered  h-10 border-red-500"
               value={inputs.fullName}
               onChange={(e) =>
                 setInputs({ ...inputs, fullName: e.target.value })
@@ -52,8 +52,8 @@ const SignUp = () => {
             </label>
             <input
               type="text"
-              placeholder="johndoe"
-              className="w-full input input-bordered h-10"
+              placeholder="Enter username"
+              className="w-full input input-bordered h-10 border-red-500"
               value={inputs.username}
               onChange={(e) =>
                 setInputs({ ...inputs, username: e.target.value })
@@ -68,7 +68,7 @@ const SignUp = () => {
             <input
               type="password"
               placeholder="Enter Password"
-              className="w-full input input-bordered h-10"
+              className="w-full input input-bordered h-10 border-red-500"
               value={inputs.password}
               onChange={(e) =>
                 setInputs({ ...inputs, password: e.target.value })
@@ -83,7 +83,7 @@ const SignUp = () => {
             <input
               type="password"
               placeholder="Confirm Password"
-              className="w-full input input-bordered h-10"
+              className="w-full input input-bordered h-10 border-red-500"
               value={inputs.confirmPassword}
               onChange={(e) =>
                 setInputs({ ...inputs, confirmPassword: e.target.value })
@@ -106,7 +106,7 @@ const SignUp = () => {
 
           <div>
             <button
-              className="btn btn-block btn-sm mt-2 border border-slate-700"
+              className="btn btn-block btn-sm mt-2 border border-slate-700 text-red-700 hover:bg-red-700 transition duration-500 ease-in-out hover:text-white"
               disabled={loading}
             >
               {loading ? (

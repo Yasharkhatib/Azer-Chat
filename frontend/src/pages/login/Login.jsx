@@ -29,7 +29,7 @@ const Login = () => {
             <input
               type="text"
               placeholder="Enter username"
-              className="w-full input input-bordered h-10"
+              className="w-full input input-bordered h-10 border-red-500"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -42,7 +42,7 @@ const Login = () => {
             <input
               type="password"
               placeholder="Enter Password"
-              className="w-full input input-bordered h-10"
+              className="w-full input input-bordered h-10 border-red-500"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -55,7 +55,10 @@ const Login = () => {
           </Link>
 
           <div>
-            <button className="btn btn-block btn-sm mt-2" disabled={loading}>
+            <button
+              className="btn btn-block btn-sm mt-2 border border-slate-700 text-red-700 hover:bg-red-700 transition duration-500 ease-in-out hover:text-white"
+              disabled={loading}
+            >
               {loading ? (
                 <span className="loading loading-spinner "></span>
               ) : (
