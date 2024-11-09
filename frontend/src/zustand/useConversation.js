@@ -5,8 +5,9 @@ const useConversation = create((set) => ({
   setSelectedConversation: (selectedConversation) =>
     set({ selectedConversation }),
 
-  // Store messages per conversation ID
   messages: {},
+
+  // Use setMessages to load the initial message list from the server
   setMessages: (conversationId, newMessages) =>
     set((state) => ({
       messages: {
@@ -15,7 +16,7 @@ const useConversation = create((set) => ({
       },
     })),
 
-  // Add a single message to the conversation
+  // Use addMessage to instantly add a new message in real-time
   addMessage: (conversationId, message) =>
     set((state) => {
       const existingMessages = state.messages[conversationId] || [];

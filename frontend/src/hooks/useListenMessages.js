@@ -13,7 +13,7 @@ const useListenMessages = () => {
       const sound = new Audio(notificationSound);
       sound.play();
 
-      // Add the new message to the correct conversation
+      // Add the new message to the specific conversation's messages
       addMessage(newMessage.conversationId, newMessage);
     });
 
