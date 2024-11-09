@@ -5,27 +5,27 @@ const useConversation = create((set) => ({
   setSelectedConversation: (selectedConversation) =>
     set({ selectedConversation }),
 
-  // Store messages by conversation ID
+  // Store messages per conversation ID
   messages: {},
   setMessages: (conversationId, newMessages) =>
     set((state) => ({
       messages: {
         ...state.messages,
-        [conversationId]: [...newMessages], // Explicitly spread new messages for reactivity
+        [conversationId]: newMessages,
       },
     })),
 
-  // Append a single new message to an existing conversation's messages
-  addMessage: (conversationId, newMessage) =>
-    set((state) => ({
-      messages: {
-        ...state.messages,
-        [conversationId]: [
-          ...(state.messages[conversationId] || []),
-          newMessage,
-        ],
-      },
-    })),
+  // Add a single message to the conversation
+  addMessage: (conversationId, message) =>
+    set((state) => {
+      const existingMessages = state.messages[conversationId] || [];
+      return {
+        messages: {
+          ...state.messages,
+          [conversationId]: [...existingMessages, message],
+        },
+      };
+    }),
 }));
 
 export default useConversation;

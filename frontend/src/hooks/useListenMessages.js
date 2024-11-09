@@ -9,17 +9,16 @@ const useListenMessages = () => {
 
   useEffect(() => {
     socket?.on("newMessage", (newMessage) => {
+      newMessage.shouldShake = true;
       const sound = new Audio(notificationSound);
       sound.play();
 
-      // Check if the message is for the current selected conversation
-      if (newMessage.conversationId === selectedConversation?._id) {
-        addMessage(selectedConversation._id, newMessage); // Append new message
-      }
+      // Add the new message to the correct conversation
+      addMessage(newMessage.conversationId, newMessage);
     });
 
     return () => socket?.off("newMessage");
-  }, [socket, selectedConversation?._id, addMessage]);
+  }, [socket, addMessage, selectedConversation]);
 };
 
 export default useListenMessages;
