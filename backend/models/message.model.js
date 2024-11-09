@@ -12,11 +12,12 @@ const messageSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    message: {
-      type: String,
+    conversationId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Conversation",
       required: true,
     },
-    // createdAt, updatedAt
+    message: { type: String, required: true },
   },
   { timestamps: true }
 );
