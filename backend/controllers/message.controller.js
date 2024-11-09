@@ -9,37 +9,40 @@ export const sendMessage = async (req, res) => {
     const { id: receiverId } = req.params;
     const senderId = req.user._id;
 
-    // Find or create a conversation between sender and receiver
+    // Find or create the conversation
     let conversation = await Conversation.findOne({
       participants: { $all: [senderId, receiverId] },
     });
 
+    // If no conversation, create a new one
     if (!conversation) {
       conversation = await Conversation.create({
         participants: [senderId, receiverId],
       });
     }
 
-    // Create a new message
+    // Create the new message and link it to the conversation
     const newMessage = new Message({
       senderId,
       receiverId,
       message,
+      conversationId: conversation._id, // Set the conversationId here
     });
 
-    // Add the new message to the conversation
-    conversation.messages.push(newMessage._id);
+    // Save the new message and update the conversation
+    if (newMessage) {
+      conversation.messages.push(newMessage._id);
+    }
 
-    // Save the conversation and the new message in parallel
+    // Save both conversation and message
     await Promise.all([conversation.save(), newMessage.save()]);
 
-    // Notify the receiver via socket
+    // Emit the new message to the receiver using socket.io
     const receiverSocketId = getReceiverSocketId(receiverId);
     if (receiverSocketId) {
       io.to(receiverSocketId).emit("newMessage", newMessage);
     }
 
-    // Respond with the new message
     res.status(201).json(newMessage);
   } catch (error) {
     console.log("Error in sendMessage controller: ", error.message);
